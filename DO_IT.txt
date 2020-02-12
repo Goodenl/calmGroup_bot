@@ -1,0 +1,19 @@
+# load file
+
+bot input(get)
+  -> upload on serv & make file_id
+    -> save file_id in local file & and make him id
+      -> bot send file & calc id number.
+
+#save file_id
+
+get file
+  -> check id & make assoc arr{"id":"file_id"}
+    -> trigger on command & show upload list
+      -> write(dump) json file.
+
+# upload file
+
+get triger | get triger and id
+  -> get file_id | get need id and file_id
+    -> send file & remove and replace from file_id_arr

@@ -17,3 +17,10 @@ get file
 get triger | get triger and id
   -> get file_id | get need id and file_id
     -> send file & remove and replace from file_id_arr
+
+assoc array:
+
+file_id{photo:{photo...}, video:{video...}, document{document...}, audio{audio...}}
+
+if file_id[x] = x:
+  sendx = file_id[x][*]

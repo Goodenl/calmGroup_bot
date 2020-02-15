@@ -14,25 +14,26 @@ file_id = dict(photo = [], video = [], document = [], audio = [])
 
 @bot.message_handler(content_types=["photo"])
 def getPhotoFile(message):
-    bot.send_message(message.chat.id, message.photo[2].file_id)
-    bot.get_file(message.photo[2].file_id)
-    file_id["photo"].append(message.photo[2].file_id)
+    bot.send_message(message.chat.id, "Фото загружено!\n" + "(" + message.photo[0].file_id + ")")
+    bot.get_file(message.photo[0].file_id)
+    file_id["photo"].append(message.photo[0].file_id)
+
 
 @bot.message_handler(content_types=["video"])
 def getPhotoFile(message):
-    bot.send_message(message.chat.id, message.video.file_id)
+    bot.send_message(message.chat.id, "Видео загружено!\n" + "(" + message.photo[0].file_id + ")")
     bot.get_file(message.video.file_id)
     file_id["video"].append(message.video.file_id)
 
 @bot.message_handler(content_types=["document"])
 def getPhotoFile(message):
-    bot.send_message(message.chat.id, message.document.file_id)
+    bot.send_message(message.chat.id, "Документ загружено!\n" + "(" + message.photo[0].file_id + ")")
     bot.get_file(message.document.file_id)
     file_id["document"].append(message.document.file_id)
 
 @bot.message_handler(content_types=["audio"])
 def getPhotoFile(message):
-    bot.send_message(message.chat.id, message.audio.file_id)
+    bot.send_message(message.chat.id, "Аудио загружено!\n" + "(" + message.photo[0].file_id + ")")
     bot.get_file(message.audio.file_id)
     file_id["audio"].append(message.audio.file_id)
 
@@ -44,7 +45,7 @@ def uploadFile(message):
             fw.close()
         bot.send_message(message.chat.id, "Успешно загружено!")
     else:
-        pass
+        bot.send_message(message.chat.id, "Пс, зайди ко мне...")
 
 @bot.message_handler(commands=["load"])     # load file_id from file_id_arr.py
 def loadInGroup(message):
@@ -53,11 +54,22 @@ def loadInGroup(message):
 
         with open("file_id_arr.json", "r") as json_data:
             arr_data = json.load(json_data)
+            json_data.close()
 
-        for i in range(len(arr_data["photo"])):
-            bot.send_photo(message.chat.id, arr_data["photo"][i])
+        if arr_data["photo"]:
+            for i in range(len(arr_data["photo"])):
+                bot.send_photo(message.chat.id, arr_data["photo"][i])
+        if arr_data["video"]:
+            for i in range(len(arr_data["video"])):
+                bot.send_video(message.chat.id, arr_data["video"][i])
+        if arr_data["document"]:
+            for i in range(len(arr_data["document"])):
+                bot.send_document(message.chat.id, arr_data["document"][i])
+        if arr_data["audio"]:
+            for i in range(len(arr_data["audio"])):
+                bot.send_audio(message.chat.id, arr_data["audio"][i])
     else:
-        bot.send_message(message.chat.id, "Пс, зайди ко мне...")
+        pass
 
 @bot.message_handler(commands=["test"])
 def testCheckAndOther(message):
@@ -66,6 +78,7 @@ def testCheckAndOther(message):
     else:
         bot.send_message(message.chat.id, "Отвали, извращенец!")
     bot.send_message(message.chat.id, message.chat.type)
+
 
 # run
 bot.polling(none_stop=True)

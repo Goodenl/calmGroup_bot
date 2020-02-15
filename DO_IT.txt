@@ -20,7 +20,7 @@ get triger | get triger and id
 
 assoc array:
 
-file_id{photo:{photo...}, video:{video...}, document{document...}, audio{audio...}}
+arr_data{photo:{photo...}, video:{video...}, document{document...}, audio{audio...}}
 
-if file_id[x] = x:
+if arr_data[x] = x:
   sendx = file_id[x][*]

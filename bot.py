@@ -1,3 +1,5 @@
+# make cofig file with TOKEN
+
 import telebot
 import config
 import time
@@ -70,6 +72,13 @@ def loadInGroup(message):
                 bot.send_audio(message.chat.id, arr_data["audio"][i])
     else:
         pass
+
+@bot.message_handler(commands=["help"])
+def helplessUser(message):
+    if message.chat.type == "group":
+        bot.send_message(message.chat.id, "Дорогой, "+ message.from_user.first_name +", наверное ты не знаешь как загружать файлы? Зайди ко мне в личный чатик и отправь команду \"/help\", тогда я тебе расскажу ;)")
+    elif message.chat.type == "private":
+        bot.send_message(message.chat.id, "Ты понимаешь куда ты попал, салага?! Здесь тбе не место где ты просто можешь ходить по чатам.\nЗначит слушай меня, здесь главное не ошибиться, иначе полетят все сервера с твоими голыми фоточками.\nБери свои фотки, музыку и прочее барахло которое нужно загрузить и аккуратно, слышишь, аккуратно ложи в этот чат. Потом, чтобы подтвердить, введи команду /upload, тогда все твои фоточки будут в порядке, сынок.")
 
 @bot.message_handler(commands=["test"])
 def testCheckAndOther(message):

@@ -52,7 +52,6 @@ def uploadFile(message):
 @bot.message_handler(commands=["load"])     # load file_id from file_id_arr.py
 def loadInGroup(message):
     if message.chat.type == 'group':
-        bot.send_message(message.chat.id, "Вот ваша порция спокойствия:")
 
         with open("file_id_arr.json", "r") as json_data:
             arr_data = json.load(json_data)
@@ -87,6 +86,10 @@ def testCheckAndOther(message):
     else:
         bot.send_message(message.chat.id, "Отвали, извращенец!")
     bot.send_message(message.chat.id, message.chat.type)
+    with open("file_id_arr.json", "r") as json_data:
+        arr_data = json.load(json_data)
+        json_data.close()
+    bot.send_message(message.chat.id, arr_data)
 
 
 # run

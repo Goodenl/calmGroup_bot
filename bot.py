@@ -23,19 +23,19 @@ def getPhotoFile(message):
 
 @bot.message_handler(content_types=["video"])
 def getPhotoFile(message):
-    bot.send_message(message.chat.id, "Видео загружено!\n" + "(" + message.photo[0].file_id + ")")
+    bot.send_message(message.chat.id, "Видео загружено!\n" + "(" + message.video.file_id + ")")
     bot.get_file(message.video.file_id)
     file_id["video"].append(message.video.file_id)
 
 @bot.message_handler(content_types=["document"])
 def getPhotoFile(message):
-    bot.send_message(message.chat.id, "Документ загружено!\n" + "(" + message.photo[0].file_id + ")")
+    bot.send_message(message.chat.id, "Документ загружено!\n" + "(" + message.document.file_id + ")")
     bot.get_file(message.document.file_id)
     file_id["document"].append(message.document.file_id)
 
 @bot.message_handler(content_types=["audio"])
 def getPhotoFile(message):
-    bot.send_message(message.chat.id, "Аудио загружено!\n" + "(" + message.photo[0].file_id + ")")
+    bot.send_message(message.chat.id, "Аудио загружено!\n" + "(" + message.audio.file_id + ")")
     bot.get_file(message.audio.file_id)
     file_id["audio"].append(message.audio.file_id)
 
@@ -52,7 +52,7 @@ def uploadFile(message):
 @bot.message_handler(commands=["load"])     # load file_id from file_id_arr.py
 def loadInGroup(message):
     if message.chat.type == 'group':
-        bot.send_message(message.chat.id, "Вот ваши изображения:")
+        bot.send_message(message.chat.id, "Вот ваша порция спокойствия:")
 
         with open("file_id_arr.json", "r") as json_data:
             arr_data = json.load(json_data)
@@ -78,7 +78,7 @@ def helplessUser(message):
     if message.chat.type == "group":
         bot.send_message(message.chat.id, "Дорогой, "+ message.from_user.first_name +", наверное ты не знаешь как загружать файлы? Зайди ко мне в личный чатик и отправь команду \"/help\", тогда я тебе расскажу ;)")
     elif message.chat.type == "private":
-        bot.send_message(message.chat.id, "Ты понимаешь куда ты попал, салага?! Здесь тбе не место где ты просто можешь ходить по чатам.\nЗначит слушай меня, здесь главное не ошибиться, иначе полетят все сервера с твоими голыми фоточками.\nБери свои фотки, музыку и прочее барахло которое нужно загрузить и аккуратно, слышишь, аккуратно ложи в этот чат. Потом, чтобы подтвердить, введи команду /upload, тогда все твои фоточки будут в порядке, сынок.")
+        bot.send_message(message.chat.id, "Ты понимаешь куда ты попал, салага?! Здесь тебе не место где ты просто можешь ходить по чатам.\nЗначит слушай меня, здесь главное не ошибиться, иначе полетят все сервера с твоими голыми фоточками.\nБери свои фотки, музыку и прочее барахло которое нужно загрузить и аккуратно, слышишь, аккуратно ложи в этот чат. Потом, чтобы подтвердить, введи команду /upload, тогда все твои фоточки будут в порядке, сынок.")
 
 @bot.message_handler(commands=["test"])
 def testCheckAndOther(message):

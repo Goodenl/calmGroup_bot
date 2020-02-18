@@ -89,7 +89,7 @@ def testCheckAndOther(message):
     with open("file_id_arr.json", "r") as json_data:
         arr_data = json.load(json_data)
         json_data.close()
-    bot.send_message(message.chat.id, arr_data)
+    bot.send_message(message.chat.id, "Гит работает, бэйба!")
 
 
 # run
